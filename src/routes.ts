@@ -11,9 +11,8 @@ routes.post(
   async (req, res) => {
     const { destination, filename } = req.file;
     const path = `${destination}\\${filename}`;
-    const url = await sendMessage('img', path);
+    const url = await sendMessage('img', path, res);
     console.log(url);
-    return res.json({ url });
   }
 );
 
