@@ -12,7 +12,7 @@ const sendMessage = (msg: string, destination: string, res: Response) => {
   const client = new Discord.Client();
   client.on('ready', () => {
     const testChannel = client.channels.cache.find(
-      (channel) => channel.id === '715174850322235416'
+      (channel) => channel.id === process.env.CHANNEL_ID
     );
     if (testChannel) {
       testChannel.send(msg, { files: [destination] }).then((sent: Isent) => {
@@ -24,7 +24,7 @@ const sendMessage = (msg: string, destination: string, res: Response) => {
     }
   });
 
-  client.login('NzE1MTc0MDI3OTc0NTQxMzIy.Xs5X3g.uCAH7K8KB7oeTuZZdjWldA6jca4');
+  client.login(process.env.DISCORD_TOKEN);
 };
 
 export default sendMessage;
