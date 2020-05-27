@@ -5,11 +5,16 @@ import sendMessage from './bot';
 
 const routes = Router();
 
-routes.post('/sendFile', multer(multerConfig).single('file'), (req, res) => {
-  const { destination, filename } = req.file;
-  const path = `${destination}\\${filename}`;
-  sendMessage('img', path);
-  return res.sendStatus(200);
-});
+routes.post(
+  '/sendFile',
+  multer(multerConfig).single('file'),
+  async (req, res) => {
+    const { destination, filename } = req.file;
+    const path = `${destination}\\${filename}`;
+    const url = await sendMessage('img', path);
+    console.log(url);
+    return res.json({ url });
+  }
+);
 
 export default routes;
